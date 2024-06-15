@@ -1,16 +1,27 @@
 import express from 'express';
-import { getProducts, getProductById, createProduct } from '../../models/products/index.js';
+import { getProducts, getProductById, createProduct, deleteProduct } from '../../models/products/index.js';
 
 
 const router = express.Router();
-
-
 
 router.get('/api/product/:id', async (req, res) => {
   try {
     const productId = req.params.id;
     const todoList = await getProductById(productId);
     res.json(todoList);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: error.message
+    });
+  }
+});
+
+router.delete('/api/product/:id', async (req, res) => {
+  try {
+    const productId = req.params.id;
+    await deleteProduct(productId);
+    res.status(200).json({message: 'Product deleted successfully.'});
   } catch (error) {
     console.log(error);
     res.status(500).json({
@@ -34,7 +45,8 @@ router.post('/api/product', async (req, res) => {
 
 router.get('/api/products', async (req, res) => {
   try {
-    const todoList = await getProducts();
+    const convert = req.query.convert;
+    const todoList = await getProducts(convert);
     res.json(todoList);
   } catch (error) {
     console.log(error);

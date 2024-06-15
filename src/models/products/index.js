@@ -3,10 +3,16 @@ import { query } from '../../core/database/database-handler.js';
 const schema = 'public';
 const table = 'products'
 
-async function getProducts() {
+async function getProducts(convert) {
   const sql = `select * from ${schema}.${table}`;
   const result = await query(sql);
-  return result.rows;
+  const products = result.rows;
+  if (convert) {
+    for(let i = 0 ; i < products.length ; i++) {
+      products[i].price = +products[i].price * 60000; 
+    }
+  }
+  return products;
 }
 
 async function getProductById(productId) {
@@ -15,7 +21,7 @@ async function getProductById(productId) {
     where id = $1
   `;
   const result = await query(sql, [productId]);
-  return result.rows;
+  return result.rows[0];
 }
 
 async function createProduct(productData) {
@@ -30,9 +36,19 @@ async function createProduct(productData) {
   return result;
 }
 
+async function deleteProduct(productId) {
+  const sql = `
+    delete from ${schema}.${table}
+    where id = $1
+  `;
+  const result = await query(sql, [productId]);
+  return result;
+}
+
 
 export {
   getProducts,
   getProductById,
-  createProduct
+  createProduct,
+  deleteProduct
 };
