@@ -3,10 +3,16 @@ import { query } from '../../core/database/database-handler.js';
 const schema = 'public';
 const table = 'products'
 
-async function getProducts() {
+async function getProducts(convert) {
   const sql = `select * from ${schema}.${table}`;
   const result = await query(sql);
-  return result.rows;
+  const products = result.rows;
+  if (convert) {
+    for(let i = 0 ; i < products.length ; i++) {
+      products[i].price = +products[i].price * 60000; 
+    }
+  }
+  return products;
 }
 
 async function getProductById(productId) {

@@ -45,7 +45,8 @@ router.post('/api/product', async (req, res) => {
 
 router.get('/api/products', async (req, res) => {
   try {
-    const todoList = await getProducts();
+    const convert = req.query.convert;
+    const todoList = await getProducts(convert);
     res.json(todoList);
   } catch (error) {
     console.log(error);
