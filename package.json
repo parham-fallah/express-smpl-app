@@ -4,9 +4,7 @@
   "description": "",
   "main": "./src/app.js",
   "type": "module",
-  "scripts": {
-    "start": "nodemon ./src/app.js"
-  },
+  "scripts": {},
   "author": "",
   "license": "ISC",
   "dependencies": {
