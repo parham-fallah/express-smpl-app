@@ -7,8 +7,8 @@ const router = express.Router();
 router.get('/api/product/:id', async (req, res) => {
   try {
     const productId = req.params.id;
-    const todoList = await getProductById(productId);
-    res.json(todoList);
+    const product = await getProductById(productId);
+    res.json(product);
   } catch (error) {
     console.log(error);
     res.status(500).json({
@@ -46,8 +46,8 @@ router.post('/api/product', async (req, res) => {
 router.get('/api/products', async (req, res) => {
   try {
     const convert = req.query.convert;
-    const todoList = await getProducts(convert);
-    res.json(todoList);
+    const products = await getProducts(convert);
+    res.json(products);
   } catch (error) {
     console.log(error);
     res.status(500).json({
