@@ -15,7 +15,7 @@ async function getProductById(productId) {
     where id = $1
   `;
   const result = await query(sql, [productId]);
-  return result.rows;
+  return result.rows[0];
 }
 
 async function createProduct(productData) {
@@ -30,9 +30,19 @@ async function createProduct(productData) {
   return result;
 }
 
+async function deleteProduct(productId) {
+  const sql = `
+    delete from ${schema}.${table}
+    where id = $1
+  `;
+  const result = await query(sql, [productId]);
+  return result;
+}
+
 
 export {
   getProducts,
   getProductById,
-  createProduct
+  createProduct,
+  deleteProduct
 };
