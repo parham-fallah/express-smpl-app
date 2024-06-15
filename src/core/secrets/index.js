@@ -5,8 +5,14 @@ const POSTGRES_CREDENTIALS = {
   password: process.env['PGPASSWORD'],
   port: +process.env['PGPORT'],
   ssl: !!+process.env['PGSSL'],
+};
+
+const EXPRESS_APP = {
+  port: process.env['port'],
+  
 }
 
 export {
-  POSTGRES_CREDENTIALS
+  POSTGRES_CREDENTIALS,
+  EXPRESS_APP
 };

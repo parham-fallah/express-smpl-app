@@ -2,8 +2,10 @@ import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 
+import { EXPRESS_APP } from './core/secrets/index.js'
+
 const app = express();
-const serverPort = process.env.port;
+const serverPort = EXPRESS_APP.port;
 
 app.use(cors());
 app.use(express.json());
