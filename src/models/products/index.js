@@ -25,14 +25,15 @@ async function getProductById(productId) {
 }
 
 async function createProduct(productData) {
-  const {name, description, price, stock, is_enable} = productData;
+  const {name, description, price, stock} = productData;
+  const updatedEnables = !stock || stock == 0 ? false : true;
   const sql = `
     insert into ${schema}.${table}
     (name, description, price, stock, is_enable)
     values
     ($1, $2, $3, $4, $5)
   `;
-  const result = await query(sql, [name, description, price, stock, is_enable]);
+  const result = await query(sql, [name, description, price, stock, updatedEnables]);
   return result;
 }
 
