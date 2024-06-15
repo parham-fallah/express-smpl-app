@@ -1,12 +1,12 @@
 import express from 'express';
-import { userProducts } from '../../models/products/index.js';
+import { getProducts } from '../../models/products/index.js';
 
 
 const router = express.Router();
 
 router.get('/api/products', async (req, res) => {
   try {
-    const todoList = await userProducts();
+    const todoList = await getProducts();
     res.json(todoList);
   } catch (error) {
     console.log(error);
