@@ -10,8 +10,8 @@ async function getProducts() {
 }
 
 async function getProductById(productId) {
-  const sql = `select * from ${schema}.${table}`;
-  const result = await query(sql);
+  const sql = `select * from ${schema}.${table} where id = $1`;
+  const result = await query(sql, [productId]);
   return result.rows;
 }
 
