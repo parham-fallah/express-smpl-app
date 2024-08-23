@@ -7,7 +7,6 @@ CREATE TABLE public.users (
     password VARCHAR(50) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    last_login TIMESTAMP,
     role VARCHAR(50)
 );
 ```
