@@ -1,24 +1,33 @@
-import "dotenv/config";
-import express from "express";
-import cors from "cors";
+import 'dotenv/config';
+import express from 'express';
+import cors from 'cors';
+import { EXPRESS_APP } from "./core/config/index.js";
+import { apiLoggerMiddleware, notFoundErrorHandlerMiddleware } from './core/middleware/express-middlewares.js';
+import { authValidationMiddleware } from './core/middleware/auth-middlewares.js';
 
-import { EXPRESS_APP } from "./core/secrets/index.js";
-
-import { router as usersRouter } from "./modules/users/routes.js";
-import { router as productsRouter } from "./modules/products/routes.js";
+// Backend modules
+import { router as taskRouter } from './modules/tasks/routes.js';
+import { router as userRouter } from './modules/user/routes.js';
 
 const app = express();
-const serverPort = EXPRESS_APP.port;
+const serverPort = EXPRESS_APP.port || 3000;
 
 app.use(cors());
-app.use(express.json());
+app.use(express.json()); // for parsing application/json
 
-app.get("/test", (req, res) => {
-  res.json({ message: "Server is Running." });
+app.use(apiLoggerMiddleware);
+
+app.get('/test', (req, res) => {
+  res.json({
+    message: 'Express js app is running'
+  });
 });
 
-app.use(usersRouter);
-app.use(productsRouter);
+// attach routers to express app
+app.use('/api/task', authValidationMiddleware, taskRouter);
+app.use('/api', userRouter);
+
+app.use(notFoundErrorHandlerMiddleware);
 
 app.listen(serverPort, () => {
   console.log(`server is running on port ${serverPort}`);

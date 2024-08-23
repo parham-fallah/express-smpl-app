@@ -8,12 +8,11 @@ const POSTGRES_CREDENTIALS = {
   connectionString: process.env['PG_CONNECTION_STRING']
 };
 
-const EXPRESS_APP = {
-  port: process.env['port'],
-  
-}
+const JWT_SECRETS = {
+  signKey: process.env['SIGN_KEY'],
+};
 
 export {
   POSTGRES_CREDENTIALS,
-  EXPRESS_APP
+  JWT_SECRETS
 };
