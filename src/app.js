@@ -16,6 +16,12 @@ app.use(express.json()); // for parsing application/json
 
 app.use(apiLoggerMiddleware);
 
+app.use((req, res, next) => {
+  res.json({
+    message: 'Express js app is running'
+  });
+})
+
 app.get('/test', (req, res) => {
   res.json({
     message: 'Express js app is running'
