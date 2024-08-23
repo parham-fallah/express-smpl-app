@@ -48,8 +48,7 @@ const deleteUserController = async (req, res, next) => {
 
 const getUserByIdController = async (req, res, next) => {
   try {
-    const userId = req.user.id;
-    const user = await getUserByIdService(userId);
+    const user = await getUserByIdService(userId = 1);
     res.json(user);
   } catch (error) {
     console.log(error);
