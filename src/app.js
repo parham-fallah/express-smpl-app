@@ -23,7 +23,7 @@ app.get('/test', (req, res) => {
 });
 
 // attach routers to express app
-app.use('/api/user', authValidationMiddleware, userRouter);
+app.use('/api/user', userRouter);
 app.use('/api', userPublicRouter);
 
 app.use(notFoundErrorHandlerMiddleware);
