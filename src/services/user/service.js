@@ -1,12 +1,18 @@
-import { createUser, getUserByUsername } from '../../model/user/index.js';
+import { 
+  createUser, 
+  getUserByUsername, 
+  updateUser, 
+  deleteUser, 
+  getUserById 
+} from '../../model/user/index.js';
 import { hash, validateHash } from '../../core/utils/encryption/index.js';
 import { jwtSign } from '../../core/auth/jwt-auth.js';
 
 const DEFAULT_SIGNUP_ROLE = 'user';
 
-async function createUserService(username, password, role=DEFAULT_SIGNUP_ROLE) {
+async function createUserService(username, password, email, role=DEFAULT_SIGNUP_ROLE) {
   const encryptedPassword = await hash(password);
-  return createUser(username, encryptedPassword, role);
+  return createUser(username, encryptedPassword, email, role);
 }
 
 async function validateUserLoginService(username, password) {
@@ -27,7 +33,23 @@ async function validateUserLoginService(username, password) {
   return userJwt;
 }
 
+async function updateUserService(userId, updateData) {
+  if (updateData.password) {
+    updateData.password = await hash(updateData.password);
+  }
+  return updateUser(userId, updateData);
+}
+async function deleteUserService(userId) {
+  return deleteUser(userId);
+}
+async function getUserByIdService(userId) {
+  return getUserById(userId);
+}
+
 export {
   createUserService,
-  validateUserLoginService
+  validateUserLoginService,
+  updateUserService,
+  getUserByIdService,
+  deleteUserService
 }
