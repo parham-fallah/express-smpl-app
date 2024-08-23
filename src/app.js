@@ -6,7 +6,6 @@ import { apiLoggerMiddleware, notFoundErrorHandlerMiddleware } from './core/midd
 import { authValidationMiddleware } from './core/middleware/auth-middlewares.js';
 
 // Backend modules
-import { router as taskRouter } from './modules/tasks/routes.js';
 import { router as userRouter, publicRouter as userPublicRouter } from './modules/user/routes.js';
 
 const app = express();
@@ -24,7 +23,6 @@ app.get('/test', (req, res) => {
 });
 
 // attach routers to express app
-app.use('/api/task', authValidationMiddleware, taskRouter);
 app.use('/api/user', authValidationMiddleware, userRouter);
 app.use('/api', userPublicRouter);
 
