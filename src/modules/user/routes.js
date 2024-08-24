@@ -15,7 +15,7 @@ import {
 const publicRouter = express.Router();
 const router = express.Router();
 
-publicRouter.post('/signup', createUserValidation, createUserController);
+publicRouter.post('/signup', createUserController, createUserValidation);
 publicRouter.post('/signin', signInValidation, loginUserController);
 
 router.delete('', deleteUserController)
