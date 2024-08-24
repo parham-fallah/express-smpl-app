@@ -56,7 +56,7 @@ const updateUser = async (id, fields) => {
 
 // Function to delete a user
 const deleteUser = async (id) => {
-  const sql = 'DELETE FROM public.users WHERE id = $1 RETURNING *;';
+  const sql = 'DELETE FROM public.users WHERE username = $1 RETURNING *;';
   const params = [id];
   try {
     const result = await query(sql, params);
