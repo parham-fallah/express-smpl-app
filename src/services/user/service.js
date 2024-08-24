@@ -42,7 +42,7 @@ async function updateUserService(userId, updateData) {
 async function deleteUserService(userId) {
   return deleteUser(userId);
 }
-async function getUserByIdService(userId) {
+async function getUserByIdService(userId = 0) {
   return getUserById(userId);
 }
 
