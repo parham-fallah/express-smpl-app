@@ -62,7 +62,7 @@ const getUserByIdController = async (req, res, next) => {
 const loginUserController = async (req, res, next) => {
   try {
     const {username, password} = req.body;
-    const jwt = await validateUserLoginService(username, password);
+    const jwt = validateUserLoginService(username, password);
     res.status(200).json({jwt: jwt});
   } catch (error) {
     console.log(error);
