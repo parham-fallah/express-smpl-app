@@ -28,7 +28,7 @@ const getUserById = async (userId) => {
 const createUser = async (username, password, email, role) => {
   const sql = `
     INSERT INTO public.users (username, password, email, role)
-    VALUES ($1, $2, $3, $4)
+    VALUES ($1, $2)
     RETURNING *;
   `;
   const params = [username, password, email, role];
