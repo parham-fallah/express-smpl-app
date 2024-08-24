@@ -9,7 +9,7 @@ import { authValidationMiddleware } from './core/middleware/auth-middlewares.js'
 import { router as userRouter, publicRouter as userPublicRouter } from './modules/user/routes.js';
 
 const app = express();
-const serverPort = EXPRESS_APP.port || 3001;
+const serverPort =  3001 || EXPRESS_APP.port;
 
 app.use(cors());
 app.use(express.json()); // for parsing application/json
@@ -29,5 +29,5 @@ app.use('/api', userPublicRouter);
 app.use(notFoundErrorHandlerMiddleware);
 
 app.listen(serverPort, () => {
-  console.log(`server is running on port 3001`);
+  console.log(`server is running on port 3002`);
 });
